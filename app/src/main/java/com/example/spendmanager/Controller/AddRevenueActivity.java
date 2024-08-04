@@ -1,12 +1,16 @@
 package com.example.spendmanager.Controller;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +22,8 @@ public class AddRevenueActivity extends AppCompatActivity {
 
     private static final int ICON_REQUEST_CODE = 1;
     private EditText amountEditText,dayEditText, descriptionEditText;
-    private ImageView iconImageView;
+   /* private ImageView iconImageView;*/
+    private ListView revenueListView;
     private Button saveButton, editButton;
     private String selectedIcon = "expense";
     int userId, revenueId =-1;
@@ -33,7 +38,7 @@ public class AddRevenueActivity extends AppCompatActivity {
         amountEditText = findViewById(R.id.amountEditText);
         descriptionEditText = findViewById(R.id.descriptionEditText);
        /* iconImageView.setImageResource(R.drawable.money);*/
-        editButton = findViewById(R.id.editButton);
+
         saveButton = findViewById(R.id.saveButton);
         dbHelper = new DatabaseHelper(this);
         userId = getIntent().getIntExtra("USER_ID", -1);
@@ -56,7 +61,7 @@ public class AddRevenueActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double amount = Double.parseDouble(amountEditText.getText().toString().trim());
+                /*double amount = Double.parseDouble(amountEditText.getText().toString().trim());
                 String description = descriptionEditText.getText().toString().trim();
                 String day = dayEditText.getText().toString().trim();
 
@@ -73,11 +78,33 @@ public class AddRevenueActivity extends AppCompatActivity {
                 }
 
             }
-        });
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        });*/
 
+
+                try {
+                    double amount = Double.parseDouble(amountEditText.getText().toString().trim());
+                    String description = descriptionEditText.getText().toString().trim();
+                    String day = dayEditText.getText().toString().trim();
+
+                    boolean success;
+                    if (revenueId != -1) {
+                        success = dbHelper.updateRevenue(revenueId, amount, description);
+                    } else {
+                        success = dbHelper.addRevenue(day, amount, description, userId);
+                    }
+
+                    if (success) {
+                        Toast.makeText(AddRevenueActivity.this, "Revenue saving success!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(AddRevenueActivity.this, "Error saving revenue!", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, "Invalid number format", e);
+                    Toast.makeText(AddRevenueActivity.this, "Invalid number format", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Log.e(TAG, "Error saving revenue", e);
+                    Toast.makeText(AddRevenueActivity.this, "Error saving revenue", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

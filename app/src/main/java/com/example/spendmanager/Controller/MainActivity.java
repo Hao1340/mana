@@ -21,13 +21,15 @@ public class MainActivity extends Activity {
         addRevenueButton = findViewById(R.id.addRevenueButtonm);
         addExpenseButton = findViewById(R.id.addExpenseButtonm);
 
-    addRevenueButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(MainActivity.this, AddRevenueActivity.class);
-            startActivity(intent);
-        }
-    });
+        // Xử lý sự kiện khi người dùng nhấn nút "Add Revenue"
+        addRevenueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Tạo Intent để chuyển sang AddRevenueActivity
+                Intent intent = new Intent(MainActivity.this, AddRevenueActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

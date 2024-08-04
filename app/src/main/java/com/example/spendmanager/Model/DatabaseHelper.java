@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import  com.example.spendmanager.Controller.AddRevenueActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -130,6 +131,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] selectionArgs = {String.valueOf(userId)};
 
         return  db.query(TABLE_REVENUE, columns, selection, selectionArgs, null, null, COLUMN_REVENUE_AMOUNT+"ASC");
+    }
+    public List<Revenue> getAllRevenues(int userId) {
+        List<Revenue> revenueList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {COLUMN_REVENUE_ID, COLUMN_REVENUE_DATE, COLUMN_REVENUE_AMOUNT, COLUMN_REVENUE_DESCRIPTION};
+        String selection = COLUMN_REVENUE_USER_ID + "=?";
+        String[] selectionArgs = {String.valueOf(userId)};
+
+        Cursor cursor = db.query(TABLE_REVENUE, columns, selection, selectionArgs, null, null, COLUMN_REVENUE_AMOUNT + " ASC");
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_REVENUE_ID));
+                String date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_REVENUE_DATE));
+                double amount = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_REVENUE_AMOUNT));
+                String description = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_REVENUE_DESCRIPTION));
+
+                Revenue revenue = new Revenue(id, date, amount, description);
+                revenueList.add(revenue);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return revenueList;
     }
 
 
