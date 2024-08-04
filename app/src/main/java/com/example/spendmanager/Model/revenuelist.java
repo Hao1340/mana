@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.spendmanager.Controller.AddRevenueActivity;
+/*import com.example.spendmanager.Controller.AddRevenueActivity;*/
 import com.example.spendmanager.R;
 
 import java.util.List;
@@ -110,7 +110,7 @@ public class revenuelist extends AppCompatActivity {
     private EditText amountEditText;
     private EditText descriptionEditText;
     private Button saveButton;
-    private DatabaseHelper databaseHelper;
+    private RevenueCRUD revenueCRUD;
     private int revenueId;
 
     @Override
@@ -121,10 +121,10 @@ public class revenuelist extends AppCompatActivity {
         amountEditText = findViewById(R.id.amountEditText);
         descriptionEditText = findViewById(R.id.descriptionEditText);
         saveButton = findViewById(R.id.saveButton);
-        databaseHelper = new DatabaseHelper(this);
+        revenueCRUD = new RevenueCRUD(this);
         revenueId = getIntent().getIntExtra("REVENUE_ID", -1);
 
-        Revenue revenue = (Revenue) databaseHelper.getRevenue(revenueId);
+        Revenue revenue = (Revenue) revenueCRUD.getAllRevenues(revenueId);
         if (revenue != null) {
             amountEditText.setText(String.valueOf(revenue.getAmount()));
             descriptionEditText.setText(revenue.getDescription());
@@ -133,7 +133,7 @@ public class revenuelist extends AppCompatActivity {
         saveButton.setOnClickListener(v -> {
             double amount = Double.parseDouble(amountEditText.getText().toString());
             String description = descriptionEditText.getText().toString();
-            boolean result = databaseHelper.updateRevenue(revenueId, amount, description);
+            boolean result = revenueCRUD.updateRevenue(revenueId, amount, description);
             if (result) {
                 Toast.makeText(this, "Updated successfully", Toast.LENGTH_SHORT).show();
                 finish();

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import  com.example.spendmanager.Controller.AddRevenueActivity;
+/*import  com.example.spendmanager.Controller.AddRevenueActivity;*/
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_REVENUE = "revenue";
     public static final String COLUMN_REVENUE_ID = "revenue_id";
     public static final String COLUMN_REVENUE_USER_ID = "user_id";
-    private static final String COLUMN_REVENUE_DATE = "revenue_date";
+    public static final String COLUMN_REVENUE_DATE = "revenue_date";
     /*public static final String COLUMN_REVENUE_ICON = "revenue_icon";*/
     public static final String COLUMN_REVENUE_AMOUNT = "revenue_amount";
     public static final String COLUMN_REVENUE_DESCRIPTION = "revenue_description";
@@ -31,15 +31,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_EXPENSE = "expense";
     public static final String COLUMN_EXPENSE_ID = "expense_id";
     public static final String COLUMN_EXPENSE_USER_ID = "user_id";
-    private static final String COLUMN_EXPENSE_DATE = "expense_date";
+    public static final String COLUMN_EXPENSE_DATE = "expense_date";
     /*public static final String COLUMN_EXPENSE_ICON = "expense_icon";*/
     public static final String COLUMN_EXPENSE_AMOUNT = "expense_amount";
     public static final String COLUMN_EXPENSE_DESCRIPTION = "expense_description";
+
+    public static final String TABLE_TRANSACTION_LIMITS = "transaction_limits";
+    public static final String COLUMN_LIMIT_USER_ID = "user_id";
+    public static final String COLUMN_REVENUE_LIMIT = "revenue_limit";
+    public static final String COLUMN_EXPENSE_LIMIT = "expense_limit";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    //tạo bảng
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createUserTable = "CREATE TABLE " + TABLE_USERS + " (" +
@@ -64,10 +70,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_EXPENSE_AMOUNT + " REAL, " +
                 COLUMN_EXPENSE_DESCRIPTION + " TEXT, " +
                 "FOREIGN KEY(" + COLUMN_EXPENSE_USER_ID + ") REFERENCES " + TABLE_USERS + "(" + COLUMN_USER_ID + "))";
-
+        String createTransactionLimitsTable = "CREATE TABLE " + TABLE_TRANSACTION_LIMITS + " (" +
+                COLUMN_LIMIT_USER_ID + " INTEGER PRIMARY KEY, " +
+                COLUMN_REVENUE_LIMIT + " REAL DEFAULT 0, " +
+                COLUMN_EXPENSE_LIMIT + " REAL DEFAULT 0, " +
+                "FOREIGN KEY(" + COLUMN_LIMIT_USER_ID + ") REFERENCES " + TABLE_USERS + "(" + COLUMN_USER_ID + "))";
         db.execSQL(createUserTable);
         db.execSQL(createRevenueTable);
         db.execSQL(createExpenseTable);
+        db.execSQL(createTransactionLimitsTable);
     }
 
     @Override
@@ -75,6 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_REVENUE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXPENSE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRANSACTION_LIMITS);
         onCreate(db);
     }
     //user register
@@ -97,11 +109,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count > 0;
 
     }
-    public boolean addRevenue(String revenueday,double amount, String description, int userId) {
+    /*public boolean addRevenue(String revenueday,double amount, String description, int userId) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_REVENUE_USER_ID, userId);
-        /*values.put(COLUMN_REVENUE_ICON, icon);*/
+        *//*values.put(COLUMN_REVENUE_ICON, icon);*//*
         values.put(COLUMN_REVENUE_DATE, revenueday);
         values.put(COLUMN_REVENUE_AMOUNT, amount);
         values.put(COLUMN_REVENUE_DESCRIPTION, description);
@@ -155,8 +167,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         cursor.close();
         return revenueList;
-    }
-
+    }*/
 
 }
 

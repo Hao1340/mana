@@ -1,3 +1,4 @@
+/*
 package com.example.spendmanager.Controller;
 
 import android.content.Context;
@@ -98,3 +99,4 @@ public class RevenueAdapter extends BaseAdapter {
         Button delectButton;
     }
 }
+*/
