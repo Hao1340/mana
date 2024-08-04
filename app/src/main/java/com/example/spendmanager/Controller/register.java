@@ -1,4 +1,4 @@
-package com.example.spendmanager;
+package com.example.spendmanager.Controller;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,12 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.spendmanager.Database.DatabaseHelper;
+import com.example.spendmanager.Model.DatabaseHelper;
+import com.example.spendmanager.R;
 
 public class register extends Activity {
     private EditText user;

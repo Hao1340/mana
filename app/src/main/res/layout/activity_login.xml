@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/login_bk"
     android:focusable="true"
-    tools:context=".LoginActivity">
+    tools:context=".Controller.LoginActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout_Login"

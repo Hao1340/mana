@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_bk"
-    tools:context=".register"
+    tools:context=".Controller.register"
 
     >
 

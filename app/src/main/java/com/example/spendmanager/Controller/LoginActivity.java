@@ -1,4 +1,4 @@
-package com.example.spendmanager;
+package com.example.spendmanager.Controller;
 
 
 
@@ -9,17 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.spendmanager.Controller.AddRevenueActivity;
-import com.example.spendmanager.Database.DatabaseHelper;
-import com.example.spendmanager.MainActivity;
+import com.example.spendmanager.Model.DatabaseHelper;
 import com.example.spendmanager.R;
-import com.example.spendmanager.register;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -48,11 +44,11 @@ public class LoginActivity extends AppCompatActivity {
                 String username = usernameInput.getText().toString();
                 String password = passwordInput.getText().toString();
                 if(dbHelper.register(username,password)){
-                    Intent intent = new Intent(com.example.spendmanager.LoginActivity.this, AddRevenueActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }else {
-                    Toast.makeText(com.example.spendmanager.LoginActivity.this, "Invalid username or password",Toast.LENGTH_SHORT);
+                    Toast.makeText(LoginActivity.this, "Invalid username or password",Toast.LENGTH_SHORT);
                 }
             }
 
@@ -60,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(com.example.spendmanager.LoginActivity.this, register.class);
+                Intent intent = new Intent(LoginActivity.this, register.class);
                 startActivity(intent);
             }
         });

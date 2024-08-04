@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpendManager"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2074616346833411~7504128764"/>
 
         <activity
             android:name=".Model.revenuelist"
@@ -28,7 +31,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Controller.MainActivity"
             android:exported="true">
         </activity>
 

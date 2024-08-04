@@ -1,7 +1,6 @@
 package com.example.spendmanager.Controller;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +9,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.spendmanager.Database.DatabaseHelper;
+import com.example.spendmanager.Model.DatabaseHelper;
 import com.example.spendmanager.R;
 
 public class AddRevenueActivity extends AppCompatActivity {

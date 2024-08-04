@@ -1,4 +1,4 @@
-package com.example.spendmanager.Database;
+package com.example.spendmanager.Model;
 
 import android.content.ContentValues;
 import android.content.Context;
