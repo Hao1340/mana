@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_REVENUE_ID = "revenue_id";
     public static final String COLUMN_REVENUE_USER_ID = "user_id";
     private static final String COLUMN_REVENUE_DATE = "revenue_date";
-    public static final String COLUMN_REVENUE_ICON = "revenue_icon";
+    /*public static final String COLUMN_REVENUE_ICON = "revenue_icon";*/
     public static final String COLUMN_REVENUE_AMOUNT = "revenue_amount";
     public static final String COLUMN_REVENUE_DESCRIPTION = "revenue_description";
 
@@ -31,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_EXPENSE_ID = "expense_id";
     public static final String COLUMN_EXPENSE_USER_ID = "user_id";
     private static final String COLUMN_EXPENSE_DATE = "expense_date";
-    public static final String COLUMN_EXPENSE_ICON = "expense_icon";
+    /*public static final String COLUMN_EXPENSE_ICON = "expense_icon";*/
     public static final String COLUMN_EXPENSE_AMOUNT = "expense_amount";
     public static final String COLUMN_EXPENSE_DESCRIPTION = "expense_description";
 
@@ -50,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_REVENUE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_REVENUE_USER_ID + " INTEGER, " +
                  COLUMN_REVENUE_DATE + " TEXT," +
-                COLUMN_REVENUE_ICON + " TEXT, " +
+               /* COLUMN_REVENUE_ICON + " TEXT, " +*/
                 COLUMN_REVENUE_AMOUNT + " REAL, " +
                 COLUMN_REVENUE_DESCRIPTION + " TEXT, " +
                 "FOREIGN KEY(" + COLUMN_REVENUE_USER_ID + ") REFERENCES " + TABLE_USERS + "(" + COLUMN_USER_ID + "))";
@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createExpenseTable = "CREATE TABLE " + TABLE_EXPENSE + " (" +
                 COLUMN_EXPENSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_EXPENSE_USER_ID + " INTEGER, " +
-                COLUMN_EXPENSE_ICON + " TEXT, " +
+                /*COLUMN_EXPENSE_ICON + " TEXT, " +*/
                 COLUMN_EXPENSE_DATE + "TEXT,"+
                 COLUMN_EXPENSE_AMOUNT + " REAL, " +
                 COLUMN_EXPENSE_DESCRIPTION + " TEXT, " +
@@ -125,7 +125,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public Cursor getRevenue(int userId){
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {COLUMN_REVENUE_ID, COLUMN_REVENUE_ICON, COLUMN_REVENUE_DATE, COLUMN_REVENUE_AMOUNT, COLUMN_REVENUE_DESCRIPTION};
+        String[] columns = {COLUMN_REVENUE_ID,  COLUMN_REVENUE_DATE, COLUMN_REVENUE_AMOUNT, COLUMN_REVENUE_DESCRIPTION};
         String selection = COLUMN_REVENUE_ID + "=?";
         String[] selectionArgs = {String.valueOf(userId)};
 

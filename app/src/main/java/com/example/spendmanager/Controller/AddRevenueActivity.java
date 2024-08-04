@@ -32,7 +32,7 @@ public class AddRevenueActivity extends AppCompatActivity {
         dayEditText = findViewById(R.id.date);
         amountEditText = findViewById(R.id.amountEditText);
         descriptionEditText = findViewById(R.id.descriptionEditText);
-        iconImageView.setImageResource(R.drawable.money);
+       /* iconImageView.setImageResource(R.drawable.money);*/
         editButton = findViewById(R.id.editButton);
         saveButton = findViewById(R.id.saveButton);
         dbHelper = new DatabaseHelper(this);
@@ -47,9 +47,8 @@ public class AddRevenueActivity extends AppCompatActivity {
                 descriptionEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow("descriptionEditText")));
                 dayEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow("date")));
                 // Lấy giá trị của biểu tượng và hiển thị trong ImageView
-                String iconName = cursor.getString(cursor.getColumnIndexOrThrow("icon"));
-                int iconResId = getResources().getIdentifier(iconName, "drawable", getPackageName());
-                iconImageView.setImageResource(iconResId);
+               /* String iconName = cursor.getString(cursor.getColumnIndexOrThrow("icon"));*/
+
             }
             cursor.close();
         }

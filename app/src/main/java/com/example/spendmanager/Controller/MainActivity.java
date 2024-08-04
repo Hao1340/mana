@@ -21,6 +21,13 @@ public class MainActivity extends Activity {
         addRevenueButton = findViewById(R.id.addRevenueButtonm);
         addExpenseButton = findViewById(R.id.addExpenseButtonm);
 
-
+    addRevenueButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(MainActivity.this, AddRevenueActivity.class);
+            startActivity(intent);
+        }
+    });
     }
+
 }
